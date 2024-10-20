@@ -15,6 +15,9 @@ app.use(bodyParser.json({limit:"50mb",extended:true}));
 app.use(bodyParser.urlencoded({limit:"50mb",extended:true}));
 app.use(cors());
 
+app.use("/",(req,res)=> {
+    res.send("Hello Guys its not working");
+})
 
 mongoose.connect(process.env.MONGODB_URI,{dbName:"assign"}).catch((err) => console.log(err)).then(()=> console.log("mongodb connected"));
 
