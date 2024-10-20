@@ -1,6 +1,5 @@
 import http from "http";
 import mongoose, { mongo } from "mongoose";
-import cors from "cors";
 import dotenv from "dotenv";
 import express from "express";
 import bodyParser from "body-parser";
@@ -12,14 +11,14 @@ const app = express();
 
 app.use(bodyParser.json({ limit: "50mb", extended: true }));
 app.use(bodyParser.urlencoded({ limit: "50mb", extended: true }));
-const corsOpts = {
-  origin: "*",
+app.use(function(req, res, next) {
+    res.setHeader('Access-Control-Allow-Origin', '*');
+    res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE');
+    res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
+    res.setHeader('Access-Control-Allow-Credentials', true);
+    next();
+});
 
-  methods: ["GET", "POST"],
-
-  allowedHeaders: ["Content-Type"],
-};
-app.use(cors(corsOpts));
 
 app.use("/auth", authRouter);
 app.use("/loan", loanRouter);
