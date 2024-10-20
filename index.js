@@ -12,23 +12,7 @@ const app = express();
 
 app.use(bodyParser.json({ limit: "50mb", extended: true }));
 app.use(bodyParser.urlencoded({ limit: "50mb", extended: true }));
-const corsOpts = {
-    origin: "*",
-  
-    methods: ["GET", "POST"],
-  
-    allowedHeaders: ["Content-Type"],
-  };
-app.use(cors(corsOpts));
-
-app.use(function(req, res, next) {
-    res.setHeader('Access-Control-Allow-Origin', '*');
-    res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE');
-    res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
-    res.setHeader('Access-Control-Allow-Credentials', true);
-    next();
-});
-
+app.use(cors({origin:"https://671545df6712dd000887ebce--spontaneous-unicorn-3ef2dd.netlify.app/"}));
 
 app.use("/auth", authRouter);
 app.use("/loan", loanRouter);
