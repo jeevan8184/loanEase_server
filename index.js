@@ -13,7 +13,6 @@ const app=express();
 
 app.use(bodyParser.json({limit:"50mb",extended:true}));
 app.use(bodyParser.urlencoded({limit:"50mb",extended:true}));
-// app.use(cors());
 app.use(cors({ origin: '*' }));
 
 app.use("/auth",authRouter);
@@ -26,20 +25,5 @@ app.use("/",(req,res)=> {
 mongoose.connect(process.env.MONGODB_URI,{dbName:"assign"}).catch((err) => console.log(err)).then(()=> console.log("mongodb connected"));
 
 app.listen(process.env.PORT,()=> console.log(`Server is running on port ${process.env.PORT}`));
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
