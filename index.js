@@ -13,11 +13,10 @@ const app = express();
 app.use(bodyParser.json({ limit: "50mb", extended: true }));
 app.use(bodyParser.urlencoded({ limit: "50mb", extended: true }));
 const corsOpts = {
-  origin: ["http://localhost:3000", "http://671545df6712dd000887ebce--spontaneous-unicorn-3ef2dd.netlify.app"], 
+  origin: "http://localhost:3000",
   methods: ["GET", "POST", "OPTIONS"],
   allowedHeaders: ["Content-Type", "Authorization"],
-  credentials: true, 
-  preflightContinue: false,
+  credentials: true,
   optionsSuccessStatus: 204,
 };
 app.use(cors(corsOpts));
