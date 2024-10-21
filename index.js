@@ -12,12 +12,18 @@ const app = express();
 
 app.use(bodyParser.json({ limit: "50mb", extended: true }));
 app.use(bodyParser.urlencoded({ limit: "50mb", extended: true }));
-const corsOptions ={
-  origin:'*', 
-  credentials:true,        
-  optionSuccessStatus:200
-}
-app.use(cors(corsOptions));
+const corsOpts = {
+  origin: ["http://localhost:3000", "http://671545df6712dd000887ebce--spontaneous-unicorn-3ef2dd.netlify.app"], 
+  methods: ["GET", "POST", "OPTIONS"],
+  allowedHeaders: ["Content-Type", "Authorization"],
+  credentials: true, 
+  preflightContinue: false,
+  optionsSuccessStatus: 204,
+};
+app.use(cors(corsOpts));
+app.options("*", cors(corsOpts)); 
+
+
 
 app.use("/auth", authRouter);
 app.use("/loan", loanRouter);
