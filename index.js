@@ -12,6 +12,14 @@ const app = express();
 
 app.use(bodyParser.json({ limit: "50mb", extended: true }));
 app.use(bodyParser.urlencoded({ limit: "50mb", extended: true }));
+
+app.options('*', (req, res) => {
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header("Access-Control-Allow-Methods", "GET,HEAD,OPTIONS,POST,PUT");
+  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept, Authorization");
+  res.sendStatus(204); // No content
+});
+
 const corsOpts = {
   origin: "http://localhost:3000",
   methods: ["GET", "POST", "OPTIONS"],
@@ -19,21 +27,7 @@ const corsOpts = {
   credentials: true,
   optionsSuccessStatus: 204,
 };
-app.use(cors({
-  origin:true,
-  credentials:true,
-  allowedHeaders: ["Content-Type", "Authorization"],
-  credentials: true,
-  optionsSuccessStatus: 204, // some legacy browsers (IE11, various SmartTVs) choke on 204
-}));
-app.options("*", cors({
-  origin: true,
-  methods: ["GET", "POST", "OPTIONS"],
-  allowedHeaders: ["Content-Type", "Authorization"],
-  credentials: true,
-  optionsSuccessStatus: 204, // some legacy browsers (IE11, various SmartTVs) choke on 204
-})); 
-
+app.use(cors(corsOpts));
 
 
 app.use("/auth", authRouter);
