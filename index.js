@@ -12,7 +12,12 @@ const app = express();
 
 app.use(bodyParser.json({ limit: "50mb", extended: true }));
 app.use(bodyParser.urlencoded({ limit: "50mb", extended: true }));
-app.use(cors({origin:"https://671545df6712dd000887ebce--spontaneous-unicorn-3ef2dd.netlify.app/"}));
+const corsOptions ={
+  origin:'*', 
+  credentials:true,        
+  optionSuccessStatus:200
+}
+app.use(cors(corsOptions));
 
 app.use("/auth", authRouter);
 app.use("/loan", loanRouter);
