@@ -19,8 +19,20 @@ const corsOpts = {
   credentials: true,
   optionsSuccessStatus: 204,
 };
-app.use(cors(corsOpts));
-app.options("*", cors(corsOpts)); 
+app.use(cors({
+  origin:true,
+  credentials:true,
+  allowedHeaders: ["Content-Type", "Authorization"],
+  credentials: true,
+  optionsSuccessStatus: 204, // some legacy browsers (IE11, various SmartTVs) choke on 204
+}));
+app.options("*", cors({
+  origin: true,
+  methods: ["GET", "POST", "OPTIONS"],
+  allowedHeaders: ["Content-Type", "Authorization"],
+  credentials: true,
+  optionsSuccessStatus: 204, // some legacy browsers (IE11, various SmartTVs) choke on 204
+})); 
 
 
 
